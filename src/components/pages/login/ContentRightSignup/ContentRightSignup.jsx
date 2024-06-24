@@ -27,6 +27,9 @@ function ContentRightSignup() {
     }
 
 
+    const [duy, setduy] = useState('');
+
+
 
     const handleRegister = () => {
         if (isCheck) {

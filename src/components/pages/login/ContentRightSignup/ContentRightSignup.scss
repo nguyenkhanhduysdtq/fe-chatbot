@@ -1,0 +1,89 @@
+.bt-eamil {
+    background: linear-gradient(90deg, #141412, #0680d1);
+    color: #fff;
+    border: unset;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+    width: 50%;
+    height: 40px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    padding-top: 12px;
+    font-size: 15px;
+}
+
+
+.icon-email {
+    margin-left: 6px;
+    height: 1.2em;
+    width: 2em;
+}
+
+.input-control-signup {
+    border-color: rgba(9, 30, 66, .13);
+    display: block;
+    width: 384px;
+    height: 40px;
+    border-radius: 5px;
+    outline: none;
+    font-size: 15px;
+    padding-left: 10px;
+    margin-bottom: 20px;
+}
+
+.input-control-signup:focus {
+    border: 1px solid rgb(9, 137, 243);
+}
+
+
+.cl-input-checkPolicy {
+    width: 15px;
+    /* Điều chỉnh chiều rộng */
+    height: 15px;
+    /* Điều chỉnh chiều cao */
+
+}
+
+.label-policy {
+    margin-left: 5px;
+    font-size: 15px;
+
+}
+
+.title-service {
+    color: #0680d1;
+}
+
+.contaner-policy {
+    margin-bottom: 20px;
+}
+
+.title-login {
+    color: #0680d1;
+
+}
+
+.position-item {
+    width: 398px;
+    height: 43px;
+    font-size: 15px;
+}
+
+.option-item {
+    margin-bottom: 5px;
+}
+
+.const-input {
+    border-color: rgba(9, 30, 66, .13);
+    display: block;
+    width: 384px;
+    height: 40px;
+    border-radius: 5px;
+    outline: none;
+    font-size: 15px;
+    padding-left: 10px;
+    margin-bottom: 20px;
+    background-color: rgb(181, 176, 176);
+}

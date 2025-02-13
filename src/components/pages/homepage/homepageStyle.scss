@@ -1,0 +1,19 @@
+.bg-body-tertiary {
+    border: 1px solid black;
+}
+
+
+/* homepageStyle.scss */
+
+.wrapper-content {
+    display: flex; // Sử dụng flexbox
+    flex-wrap: nowrap; // Ngăn các phần tử xuống hàng
+    // gap: 20px; // Khoảng cách giữa các phần tử
+    margin-top: 20px;
+    height: 100vh;
+
+}
+
+.right-content{
+    width: 100%;
+}

@@ -1,17 +1,16 @@
-
-
-
-
-
-import ChatPage from "../components/pages/check/ChatPage"
-import ContentRightSignup from "../components/pages/login/ContentRightSignup/ContentRightSignup"
+import ChatPageSocket from "../components/pages/check/ChatPageSocket"
 import ContentRight from "../components/pages/login/content-right/ContentRight"
+import Homepage from "../components/pages/homepage/Homepage"
+import HomepageClient from "../components/pages/Dewi-1.0.0"
+import ChatPage from "../components/pages/chat/ChatPage"
 
 //publish router
 const publicRoutes = [
-    { path: '/', component: ContentRight, layout: null },
-    { path: '/signup', component: ContentRightSignup, layout: null },
-    { path: '/chat', component: ChatPage, layout: 1 },
+    { path: '/', component: HomepageClient, layout: 3 },
+    { path: '/chat-socket', component: ChatPageSocket, layout: 1 },
+    { path: '/admin', component: Homepage, layout: 2 },
+    { path: '/login', component: ContentRight, layout: null },
+    { path: '/chat', component: ChatPage, layout: 3 },
 
 
 ]

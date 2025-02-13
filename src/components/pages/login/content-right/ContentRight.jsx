@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from './ContentRightStyle.scss';
 import { FaUser, FaEye, FaFacebook, FaGoogle } from "react-icons/fa";
 import { GoEyeClosed } from "react-icons/go";
@@ -9,6 +9,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function ContentRight() {
     const cx = classNames.bind(styles)
+
+    const navigate = useNavigate();
 
 
     const [eyeShowPassWord, setEyeShowPassword] = useState(false);
@@ -22,7 +24,7 @@ function ContentRight() {
 
     useEffect(() => {
 
-        if (userAccount.userName != '' && userAccount.password != '') {
+        if (userAccount.userName !== '' && userAccount.password !== '') {
             setDisabled(false);
         } else {
             setDisabled(true);
@@ -49,14 +51,39 @@ function ContentRight() {
     }
 
 
-    const handleLogin = () => {
-        if (userAccount.userName === '' || userAccount.password === '') {
-            toast.error('codeStudent/passsword not emty !')
-        } else {
+    const handleLogin = async () => {
 
-            toast.info("Welcome my website !");
+
+        try {
+            const response = await fetch('http://localhost:8081/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: userAccount.userName,
+                    password: userAccount.password
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                toast.success('Đăng nhập thành công!');
+
+                // Chuyển hướng sang trang admin
+                localStorage.setItem('token', data.result.token);
+                localStorage.setItem('refreshToken', data.result.refreshToken);
+
+                window.location.href = '/admin';
+                // navigate("/admin");
+            } else {
+                toast.error('Đăng nhập thất bại!');
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            toast.error('Có lỗi xảy ra, vui lòng thử lại sau!');
         }
-
     }
 
 
@@ -67,11 +94,10 @@ function ContentRight() {
 
 
 
-
     return (
         <div className={cx('wrapper-right')}>
             <div className={cx('form-login')}>
-                <img className={cx('logo')} src="https://workdone.myxteam.com/img/logo-01.0958782f.png" alt="ảnh lỗi" />
+                <img className={cx('logo')} src="https://tse1.mm.bing.net/th?id=OIP.bK_Xs3Gt5Roh0xbfIumJHAHaFj&pid=Api&P=0&h=220" alt="ảnh lỗi" />
                 <h1>Đăng nhập</h1>
 
                 <div className={cx('input-item')}>
@@ -86,7 +112,7 @@ function ContentRight() {
                         onChange={handlePassword}
 
                     />
-                    <button onClick={hanldeShowPassword} >{eyeIcon}</button>
+                    <button className={cx('bt-i')} onClick={hanldeShowPassword}>{eyeIcon}</button>
                 </div>
 
                 <div className={cx('button-login')}>
@@ -103,28 +129,7 @@ function ContentRight() {
 
                 </div>
 
-                <div className={cx('support-box')}>
-                    <ul className={cx('support-item')}>
-                        <li>Quên mật khẩu ?</li>
-                        <li><Link className={cx('sign-in')} to="/signup">Đăng ký</Link></li>
-                    </ul>
-                </div>
 
-                <div className={cx('policy-box')}>
-                    <ul className={cx('policy-item')}>
-                        <li>Điền khoản dịch vụ</li>
-                        <li>Chính sách bảo mật</li>
-                    </ul>
-                </div>
-
-                <div className={cx('button-boxes')}>
-                    <div className={cx('button-login-social')}>
-                        <button className={cx('facebook')}><FaFacebook className={cx('logo-facebook')} /> <p className={cx('name-item')} >Facebook</p></button>
-                    </div>
-                    <div className={cx('button-login-social')}>
-                        <button className={cx('google')}><FaGoogle className={cx('logo-google')} /> <p className={cx('name-item')}>Google</p></button>
-                    </div>
-                </div>
             </div>
             <ToastContainer />
         </div >

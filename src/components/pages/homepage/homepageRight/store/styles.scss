@@ -1,0 +1,489 @@
+.content {
+    flex: 0 0 80%; // Không co giãn, cố định 70%
+    padding: 15px;
+    border-radius: 8px;
+    font-family: 'Arial', sans-serif;
+}
+
+
+.table-container {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #fafafa;
+    margin: 20px auto;
+    width: 100%;
+    /* Chiếm toàn bộ chiều rộng của phần tử cha */
+    max-width: 100%;
+    /* Không giới hạn chiều rộng tối đa */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+    /* Cho phép cuộn ngang khi nội dung vượt quá màn hình */
+    box-sizing: border-box;
+    /* Tính padding và border vào tổng width */
+}
+
+/* Header của bảng */
+.table-header {
+    display: flex;
+    /* Sử dụng Flexbox */
+    justify-content: flex-end;
+    /* Đẩy nút về phía bên phải */
+    align-items: center;
+    /* Căn giữa theo chiều dọc */
+    margin-bottom: 20px;
+    /* Tạo khoảng cách với bảng */
+    padding: 10px;
+    /* Thêm padding để tạo không gian */
+}
+
+.table-header h2 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.btn-create {
+    background-color: #0a50ac;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+
+
+    &:hover {
+        background-color: #2075e4;
+    }
+}
+
+/* Bảng chính */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: white;
+}
+
+/* Tiêu đề cột */
+.custom-table thead th {
+    text-align: left;
+    font-size: 14px;
+    color: #555;
+    font-weight: bold;
+    padding: 12px 8px;
+    background-color: #f4f4f4;
+}
+
+/* Dòng dữ liệu */
+.custom-table tbody tr {
+    border-bottom: 1px solid #eee;
+}
+
+.custom-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* Ô dữ liệu */
+.custom-table tbody td {
+    padding: 10px 8px;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Hành động button */
+.btn-action {
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-edit {
+    border: 1px solid green;
+    color: green;
+
+    &:hover {
+        background-color: rgb(24, 223, 24);
+        color: white;
+    }
+}
+
+.btn-sync {
+    border: 1px solid rgb(9, 44, 196);
+    color: rgb(9, 44, 196);
+
+    &:hover {
+        background-color: #1976d2;
+    }
+}
+
+.btn-delete {
+    background-color: #f44336;
+    color: white;
+
+    &:hover {
+        background-color: #d32f2f;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .table-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .btn-create {
+        margin-top: 10px;
+    }
+}
+
+.form-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    /* Nền mờ */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* Đảm bảo overlay nằm trên tất cả các phần tử khác */
+}
+
+/* Form Container */
+.form-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.form-container h3 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+
+    &:active {
+        border: 1px solid #1976d2;
+    }
+
+}
+
+.form-group textarea {
+    height: 100px;
+}
+
+/* Nút trong form */
+.form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-cancel {
+    background-color: #ccc;
+    color: #333;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #bbb;
+    }
+}
+
+
+/* Giới hạn chiều rộng của cột mô tả */
+.table-description {
+    max-width: 300px;
+    /* Đặt chiều rộng tối đa */
+    white-space: nowrap;
+    /* Giữ văn bản trên một dòng */
+    overflow: hidden;
+    /* Ẩn nội dung vượt quá */
+    text-overflow: ellipsis;
+    /* Hiển thị "..." nếu nội dung bị cắt */
+}
+
+.table-name {
+    max-width: 200px;
+    /* Đặt chiều rộng tối đa */
+    white-space: nowrap;
+    /* Giữ văn bản trên một dòng */
+    overflow: hidden;
+    /* Ẩn nội dung vượt quá */
+    text-overflow: ellipsis;
+    /* Hiển thị "..." nếu nội dung bị cắt */
+}
+
+
+.btn-submit {
+    background-color: #0a50ac;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #0c61d1;
+    }
+}
+
+
+/* ========== DOCUMENT OVERLAY ========== */
+.overlay-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5); // Nền mờ
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001; // Đảm bảo nằm trên mọi thành phần khác
+}
+
+.overlay-content {
+    background: #fff;
+    border-radius: 8px;
+    width: 700px;
+    max-width: 90%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header của Overlay */
+.overlay-header {
+    background: #1976d2;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h3 {
+        margin: 0;
+        font-size: 1.2em;
+    }
+
+    .overlay-btn-close {
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 1.5em;
+        cursor: pointer;
+
+        &:hover {
+            color: #ccc;
+        }
+    }
+}
+
+/* Body của Overlay */
+.overlay-body {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+    background: #fafafa;
+
+    .overlay-left,
+    .overlay-right {
+        flex: 1;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 15px;
+        background: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .overlay-left {
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+
+            &:focus {
+                border-color: #1976d2;
+                outline: none;
+            }
+        }
+
+        .overlay-doc-info {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #555;
+            background: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            height: 150px;
+        }
+    }
+
+    .overlay-right {
+        h4 {
+            margin-bottom: 10px;
+            font-size: 1em;
+            color: #333;
+        }
+
+        p {
+            font-size: 14px;
+            color: green;
+        }
+
+        .overlay-btn-confirm {
+            margin-top: 15px;
+            border: 1px solid #4caf50;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100px;
+            height: 30px;
+            color: #4caf50;
+
+
+            &:hover {
+                background-color: #388e3c;
+                color: white;
+            }
+        }
+    }
+}
+
+
+
+/* Footer của Overlay */
+.overlay-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 15px 20px;
+    background: #f1f1f1;
+
+    .overlay-btn-cancel {
+        background-color: #ccc;
+        color: #333;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #bbb;
+        }
+    }
+
+    .overlay-btn-submit {
+        background-color: #1976d2;
+        color: white;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #145aa0;
+        }
+    }
+}
+
+/* Responsive cho Overlay */
+@media (max-width: 768px) {
+    .overlay-body {
+        flex-direction: column;
+    }
+
+    .overlay-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+
+.textStatus {
+    border: none;
+}
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid white;
+    border-top: 5px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.disabled-btn {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:hover {
+        background-color: white;
+    }
+}

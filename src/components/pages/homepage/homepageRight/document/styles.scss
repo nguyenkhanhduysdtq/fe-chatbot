@@ -1,0 +1,405 @@
+.content {
+    flex: 0 0 80%; // Không co giãn, cố định 70%
+
+    padding: 15px;
+    border-radius: 8px;
+    font-family: 'Arial', sans-serif;
+    width: 100%;
+}
+
+.table-container {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #fafafa;
+    margin: 20px auto;
+    width: 100%;
+    /* Chiếm toàn bộ chiều rộng của phần tử cha */
+    max-width: 100%;
+    /* Không giới hạn chiều rộng tối đa */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+    /* Cho phép cuộn ngang khi nội dung vượt quá màn hình */
+    box-sizing: border-box;
+    /* Tính padding và border vào tổng width */
+}
+
+/* Header của bảng */
+.table-header {
+    display: flex;
+    /* Sử dụng Flexbox */
+    justify-content: flex-end;
+    /* Đẩy nút về phía bên phải */
+    align-items: center;
+    /* Căn giữa theo chiều dọc */
+    margin-bottom: 20px;
+    /* Tạo khoảng cách với bảng */
+    padding: 10px;
+    /* Thêm padding để tạo không gian */
+}
+
+.table-header h2 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.btn-create {
+    background-color: #0a50ac;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+
+
+    &:hover {
+        background-color: #2075e4;
+    }
+}
+
+/* Bảng chính */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: white;
+}
+
+/* Tiêu đề cột */
+.custom-table thead th {
+    text-align: left;
+    font-size: 14px;
+    color: #555;
+    font-weight: bold;
+    padding: 12px 8px;
+    background-color: #f4f4f4;
+}
+
+/* Dòng dữ liệu */
+.custom-table tbody tr {
+    border-bottom: 1px solid #eee;
+}
+
+.custom-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* Ô dữ liệu */
+.custom-table tbody td {
+    padding: 10px 8px;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Hành động button */
+.btn-action {
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-edit {
+    border: 1px solid green;
+    color: green;
+
+    &:hover {
+        background-color: #1976d2;
+    }
+}
+
+.btn-delete-file {
+    background-color: #f44336;
+    color: white;
+    border-radius: 5px;
+    width: 100px;
+    height: 40px;
+
+    border: none;
+
+    &:hover {
+        background-color: #d32f2f;
+    }
+}
+
+.btn-delete {
+    background-color: #f44336;
+    color: white;
+
+    &:hover {
+        background-color: #d32f2f;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .table-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .btn-create {
+        margin-top: 10px;
+    }
+}
+
+
+.form-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    /* Nền mờ */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* Đảm bảo overlay nằm trên tất cả các phần tử khác */
+}
+
+/* Form Container */
+.form-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.form-container h3 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+
+    &:active {
+        border: 1px solid #1976d2;
+    }
+
+}
+
+.form-group textarea {
+    height: 100px;
+}
+
+/* Nút trong form */
+.form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-cancel {
+    background-color: #ccc;
+    color: #333;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #bbb;
+    }
+}
+
+.btn-submit {
+    background-color: #0a50ac;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #085ece;
+    }
+}
+
+
+/* Form Container */
+.custom-form-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    width: 700px;
+    /* Tăng chiều rộng cho form */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    height: 300px;
+}
+
+/* Tiêu đề và nút đóng */
+.custom-form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.custom-form-header h3 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.btn-close {
+    background-color: transparent;
+    border: none;
+    font-size: 1em;
+    color: #555;
+    cursor: pointer;
+}
+
+/* Các nhóm form */
+.form-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    /* Khoảng cách giữa hai cột */
+}
+
+/* Cột bên trái */
+.form-left {
+    flex: 1;
+}
+
+/* Cột bên phải */
+.form-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Các nhóm thông tin */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #555;
+}
+
+.btn-upload:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+
+    &:hover {
+        background-color: red;
+        color: white;
+    }
+}
+
+.form-group input[type="file"] {
+    margin-top: 10px;
+    width: 100%;
+}
+
+/* Hiển thị thông tin file */
+.file-info {
+    font-size: 14px;
+    color: #db0d0d;
+    font-weight: bold;
+}
+
+.file-result {
+    font-size: 14px;
+    color: green;
+    font-weight: bold;
+}
+
+/* Các nút trong form */
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-upload,
+.btn-clear {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-upload {
+
+    color: #4caf50;
+    border: 1px solid #4caf50;
+
+    &:hover {
+        background-color: #388e3c;
+        color: white;
+    }
+}
+
+.btn-clear {
+    background-color: #f44336;
+    color: white;
+
+    &:hover {
+        background-color: #d32f2f;
+    }
+}
+
+/* Style cho bảng */
+.table-container {
+    position: relative;
+}
+
+.btn-create {
+    background-color: #0a50ac;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.btn-create:hover {
+    background-color: #2075e4;
+}

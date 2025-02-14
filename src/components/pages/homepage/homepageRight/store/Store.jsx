@@ -29,6 +29,9 @@ function Store() {
     const [idDocument, setIdDocument] = useState(0);
     const [idSync, setIdSync] = useState(0);
     const [loading, setLoading] = useState(false); // Thêm state loading
+    const [check, setCheck] = useState(null); // Thêm state loading
+
+
 
 
     // Hàm gọi API để lấy danh sách tài liệu
@@ -126,6 +129,8 @@ function Store() {
         if (!confirmDelete) {
             return;
         }
+        setLoading(true);
+        setCheck(id);
 
         const documentData = await axios.delete(`http://localhost:8081/api/delete/sync?id=${encodeURIComponent(id)}`);
 
@@ -138,6 +143,10 @@ function Store() {
         } else {
             toast.success("Xóa thành công");
         }
+
+        setCheck(null);
+        setLoading(false);
+
 
         fetchSyncDocuments();
 
@@ -204,6 +213,8 @@ function Store() {
             return;
         }
 
+        setLoading(true); // Bắt đầu hiển thị vòng quay
+
         try {
 
             const response = await axios.post('http://localhost:8081/api/sync/document', newDocumentSync); // Gọi API thêm tài liệu
@@ -243,6 +254,8 @@ function Store() {
             fetchSyncDocuments(); // Cập nhật lại danh sách tài liệu
         } catch (error) {
             console.error('Lỗi khi thêm tài liệu:', error);
+        } finally {
+            setLoading(false); // Tắt vòng quay sau khi API hoàn thành
         }
     };
 
@@ -324,7 +337,7 @@ function Store() {
                                             <AiOutlineReload /> Sync
                                         </button>
                                         <button className={cx('btn-action', 'btn-delete')} onClick={() => deleteSync(doc.id)}>
-                                            <MdDeleteForever /> Delete
+                                            <MdDeleteForever /> {loading && check == doc.id ? <span className="spinner"></span> : " Delete"}
                                         </button>
                                     </td>
                                 </tr>
@@ -370,8 +383,8 @@ function Store() {
                                 <button type="button" onClick={toggleForm} className={cx('btn-cancel')}>
                                     Cancel
                                 </button>
-                                <button type="submit" className={cx('btn-submit')} onClick={handleFormSubmit}>
-                                    Submit
+                                <button type="submit" disabled={loading} className={cx('btn-submit')} onClick={handleFormSubmit}>
+                                    {loading ? <span className="spinner"></span> : "Submit"}
                                 </button>
                             </div>
                         </form>

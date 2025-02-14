@@ -21,6 +21,7 @@ function ContentRight() {
     })
 
     const [disabled, setDisabled] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
 
@@ -53,6 +54,7 @@ function ContentRight() {
 
     const handleLogin = async () => {
 
+        setLoading(true);
 
         try {
             const response = await fetch('http://localhost:8081/api/login', {
@@ -83,6 +85,8 @@ function ContentRight() {
         } catch (error) {
             console.error('Login error:', error);
             toast.error('Có lỗi xảy ra, vui lòng thử lại sau!');
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -101,7 +105,7 @@ function ContentRight() {
                 <h1>Đăng nhập</h1>
 
                 <div className={cx('input-item')}>
-                    <input className={cx('input-control')} onChange={handleUserName} type="text" name="" id="" placeholder='Mã sinh viên' />
+                    <input className={cx('input-control')} onChange={handleUserName} type="text" name="" id="" placeholder='Tên tài khoản' />
                     <FaUser className={cx('icon-1')} />
                 </div>
                 <div className={cx('input-item')}>
@@ -125,7 +129,7 @@ function ContentRight() {
                         onClick={handleLogin}
                         disabled={disabled}
 
-                    >Đăng nhập</button>
+                    > {loading ? <span className="spinner"></span> : ""}Đăng nhập</button>
 
                 </div>
 

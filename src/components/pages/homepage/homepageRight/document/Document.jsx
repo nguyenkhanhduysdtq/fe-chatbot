@@ -273,19 +273,28 @@ function Document() {
                         </tr>
                     </thead>
                     <tbody>
-                        {documents.map((doc) => (
-                            <tr key={doc.id}>
-                                <td><strong>{doc.nameDocument}</strong></td>
-                                <td>{doc.description}</td>
-                                <td>Nguyễn Khánh Duy</td>
-                                <td>{doc.date || 'N/A'}</td>
-                                <td style={{ color: doc.status == 0 ? 'red' : 'green', fontWeight: 'bold' }}>{doc.status == 0 ? "EMPTY" : "DOCUMENTED"}</td>
-                                <td>
-                                    <button value={doc.id} className={cx('btn-action', 'btn-edit')} onClick={() => toggleOverlay(doc.id)}  ><IoDocumentsOutline /> Item</button>
-                                    <button value={doc.id} className={cx('btn-action', 'btn-delete')} onClick={() => toggledelete(doc.id)}><MdDeleteForever /> Delete</button>
-                                </td>
+                        {documents.length > 0 ? (
+                            documents.map((doc) => (
+                                <tr key={doc.id}>
+                                    <td><strong>{doc.nameDocument}</strong></td>
+                                    <td>{doc.description}</td>
+                                    <td>Nguyễn Khánh Duy</td>
+                                    <td>{doc.date || 'N/A'}</td>
+                                    <td style={{ color: doc.status == 0 ? 'red' : 'green', fontWeight: 'bold' }}>{doc.status == 0 ? "EMPTY" : "DOCUMENTED"}</td>
+                                    <td>
+                                        <button value={doc.id} className={cx('btn-action', 'btn-edit')} onClick={() => toggleOverlay(doc.id)}  ><IoDocumentsOutline /> Item</button>
+                                        <button value={doc.id} className={cx('btn-action', 'btn-delete')} onClick={() => toggledelete(doc.id)}><MdDeleteForever /> Delete</button>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+
+                            <tr>
+                                <td colSpan="6" style={{ textAlign: 'center', padding: '12px' }}>Không có dữ liệu</td>
                             </tr>
-                        ))}
+
+                        )
+                        }
 
                     </tbody>
                 </table>

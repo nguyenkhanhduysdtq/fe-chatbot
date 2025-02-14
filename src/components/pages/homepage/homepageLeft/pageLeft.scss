@@ -1,25 +1,9 @@
 .bt-item {
-    flex: 0 0 20%; // Không co giãn, cố định 30%
-    background-color: #e9ecf0; // Màu nền nhẹ để kiểm tra
+    flex: 0 0 20%;
+    background-color: #e7e8ed;
     padding: 15px;
     height: 100%;
-    background-color: #e7e8ed;
     font-family: 'Arial', sans-serif;
-
-}
-
-
-.bt {
-    border: none;
-    margin-left: 10px;
-    background-color: #e7e8ed;
-
-    &:hover {
-        background-color: rgb(211, 211, 212);
-    }
-
-
-
 }
 
 li {
@@ -27,29 +11,38 @@ li {
     margin-bottom: 15px;
     font-size: 17px;
     height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
 
     &:hover {
         background-color: rgb(211, 211, 212);
     }
 
-    margin-top: 5px;
-
-
-}
-
-h3 {
-    margin-bottom: 20px;
+    /* Khi li được chọn (dùng class active) */
+    &.active {
+        background-color: rgb(180, 180, 185);
+    }
 }
 
 
-.bt-dashbord {
-    color: blue;
+
+.bt {
+    border: none;
+    margin-left: 10px;
+    background-color: transparent;
+    /* Loại bỏ màu nền */
+    flex: 1;
+    /* Giúp button chiếm toàn bộ phần còn lại */
+    text-align: left;
+    cursor: pointer;
 }
 
-.bt-document {
-    color: blue;
-}
-
+.bt-dashbord,
+.bt-document,
 .bt-store {
-    color: blue;
+    color: rgb(39, 85, 252);
+    font-weight: bold;
 }

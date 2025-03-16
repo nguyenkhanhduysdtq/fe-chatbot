@@ -10,6 +10,7 @@ import Document from '../homepage/homepageRight/document/Document'
 import Store from '../homepage/homepageRight/store/Store'
 import styles from '../homepage/homepageStyle.scss';
 import axios from 'axios';
+import InformationClient from './homepageRight/information/InformationClient';
 
 
 function Homepage() {
@@ -96,6 +97,7 @@ function Homepage() {
                     {selectedPage === 'dashboard' && <HomepageRight />}
                     {selectedPage === 'document' && <Document />}
                     {selectedPage === 'store' && <Store />}
+                    {selectedPage === 'infor' && <InformationClient />}
                 </div>
             </div>
 

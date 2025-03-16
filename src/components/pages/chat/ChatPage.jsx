@@ -8,6 +8,7 @@ import { FaBars } from "react-icons/fa"; // Import icon ba gạch
 import { IoArrowForwardOutline } from "react-icons/io5";
 import { IoAddCircleOutline } from "react-icons/io5";
 import axios from "axios";
+import { v4 as uuidv4 } from 'uuid';
 
 
 export default function ChatPage() {
@@ -16,7 +17,7 @@ export default function ChatPage() {
     ]);
     const [input, setInput] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const [userInfo, setUserInfo] = useState({ name: "", phone: "", email: "" });
+    const [userInfo, setUserInfo] = useState({ id: "", name: "", phone: "", email: "" });
     const [hoverText, setHoverText] = useState("");
     const [hoverTextutill, setHoverTextutill] = useState("");
 
@@ -50,6 +51,7 @@ export default function ChatPage() {
         let inputUser = input
 
         const data = {
+            userId: JSON.parse(localStorage.getItem("user")).id,
             question: inputUser,
             status: 1
         };
@@ -71,9 +73,10 @@ export default function ChatPage() {
             );
 
             // call back to store total
-            if (response.data.result.answer == "Xin lỗi thông tin liên quan không có trong tài liệu.") {
+            if (response.data.result.answer === "Xin lỗi, tôi không có thông tin về vấn đề này.") {
 
                 const dataLoad = {
+                    userId: JSON.parse(localStorage.getItem("user")).id,
                     question: inputUser,
                     status: 0
                 };
@@ -88,12 +91,13 @@ export default function ChatPage() {
                 );
 
                 botReplyText = responseLoad.data.result.answer;
+
             } else {
                 botReplyText = response.data.result.answer;
             }
 
 
-            console.log("data api response :" + response)
+            console.log(botReplyText);
 
         } catch (error) {
             console.error('answer lỗi:', error);
@@ -131,6 +135,23 @@ export default function ChatPage() {
             }
         }, 20); // Điều chỉnh tốc độ hiển thị từng chữ
         // Độ trễ trước khi bot bắt đầu phản hồi
+
+        const dataQuestion = {
+            question: inputUser,
+            answer: botReplyText,
+            client_id: JSON.parse(localStorage.getItem("user")).id
+        }
+
+        const saveQuestion = await axios.post('http://localhost:8081/api/question',
+            dataQuestion,
+            {
+                headers: { "Content-Type": "application/json" }
+            }
+
+
+        );
+
+        console.log(saveQuestion.data.result);
     };
 
     const handleFormSubmit = async (e) => {
@@ -141,9 +162,14 @@ export default function ChatPage() {
             return;
         }
 
+        const idClient = uuidv4();
+        const newUserInfo = { ...userInfo, id: idClient };
+
+        localStorage.setItem("user", JSON.stringify(newUserInfo));
+
         try {
-            const response = await axios.post('http://localhost:8081/api/create/client', userInfo);
-            localStorage.setItem("user", JSON.stringify(userInfo));
+            const response = await axios.post('http://localhost:8081/api/create/client', newUserInfo);
+
 
         } catch (error) {
             console.error('Lỗi khi thêm user:', error);
@@ -252,7 +278,13 @@ export default function ChatPage() {
                             <div key={msg.id} className={`message ${msg.sender === "user" ? "user-message" : "bot-message"}`}>
                                 <div className="message-content">
                                     {msg.sender === "bot" && <img src={logo} alt="Bot Logo" className="bot-logo" />}
-                                    {msg.text}
+                                    <span
+                                        dangerouslySetInnerHTML={{
+                                            __html: msg.text
+                                                .replace(/\n/g, "<br />") // Thay xuống dòng
+                                                .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") // Thay **text** bằng <strong>text</strong>
+                                        }}
+                                    />
                                     {/* <span className={`${msg.sender === "user" ? "message-time-user" : "message-time"}`}>
                                         {formatTime(msg.timestamp)}
                                     </span> */}

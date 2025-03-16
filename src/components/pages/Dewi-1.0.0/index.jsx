@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../Dewi-1.0.0/assets/css/main.css";
@@ -33,6 +33,37 @@ const HomepageClient = () => {
   const handleClose = () => {
     setShowForm(!showForm);
   }
+
+  const sentence = "Chatbot trả lời tự động về các nội dung tuyển sinh của trường Đại học Sư phạm Hà Nội";
+  const speed = 80; // Tốc độ hiển thị từng chữ (ms)
+  const delayBeforeErase = 1500; // Thời gian hiển thị đầy đủ trước khi xóa (ms)
+
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const handleTyping = () => {
+      if (!isDeleting) {
+        if (index < sentence.length) {
+          setDisplayText((prev) => prev + sentence[index]);
+          setIndex((prev) => prev + 1);
+        } else {
+          setTimeout(() => setIsDeleting(true), delayBeforeErase);
+        }
+      } else {
+        if (index > 0) {
+          setDisplayText((prev) => prev.slice(0, -1));
+          setIndex((prev) => prev - 1);
+        } else {
+          setIsDeleting(false);
+        }
+      }
+    };
+
+    const typingInterval = setTimeout(handleTyping, speed);
+    return () => clearTimeout(typingInterval);
+  }, [index, isDeleting]);
   return (
     <>
       <header id="header" className="header d-flex align-items-center fixed-top">
@@ -50,7 +81,10 @@ const HomepageClient = () => {
           <img src={heroBg} alt="ảnh lỗi " />
           <div className="container d-flex flex-column align-items-center">
             <h2 data-aos-delay="100">HỆ THỐNG TRẢ LỜI CÂU HỎI TUYỂN SINH</h2>
-            <p data-aos-delay="200">Chatbot trả lời tự động về các nội dung tuyển sinh của trường Đại học Sư phạm Hà Nội</p>
+            <p data-aos-delay="200" style={{ fontSize: "20px", fontWeight: "bold", textAlign: "center" }}>
+              {displayText}
+              <span className="blinking-cursor">|</span>
+            </p>
             <div className="d-flex mt-4" data-aos-delay="300">
               <a href="#!" className="q-chatbot btn-get-started" onClick={handleComplete}>
                 <RiRobot2Fill className="robot-icon" />

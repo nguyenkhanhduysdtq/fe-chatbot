@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { IoDocuments } from "react-icons/io5";
 import { SiAmazondocumentdb } from "react-icons/si";
 import { MdDashboard } from "react-icons/md";
+import { FaRegAddressBook } from "react-icons/fa6";
 
 function HomepageLeft({ onSelectPage }) {
 
@@ -16,6 +17,7 @@ function HomepageLeft({ onSelectPage }) {
     const [selectDasboard, setSelectedDasboard] = useState(true);
     const [selectDocument, setSelectedDocument] = useState(false);
     const [selectStore, setSelectedStore] = useState(false);
+    const [selectInfor, setSelectedInfor] = useState(false);
 
     const handleDasboard = () => {
 
@@ -30,6 +32,10 @@ function HomepageLeft({ onSelectPage }) {
             setSelectedDocument(false);
         }
 
+        if (selectInfor) {
+            setSelectedInfor(false);
+        }
+
     }
     const handleDocument = () => {
 
@@ -41,6 +47,9 @@ function HomepageLeft({ onSelectPage }) {
 
         if (selectStore) {
             setSelectedStore(false);
+        }
+        if (selectInfor) {
+            setSelectedInfor(false);
         }
 
 
@@ -56,9 +65,32 @@ function HomepageLeft({ onSelectPage }) {
         if (selectDocument) {
             setSelectedDocument(false);
         }
+        if (selectInfor) {
+            setSelectedInfor(false);
+        }
 
 
     }
+
+    const handleInfor = () => {
+
+        setSelectedInfor(!selectInfor);
+
+        if (selectDasboard) {
+            setSelectedDasboard(false);
+        }
+
+        if (selectDocument) {
+            setSelectedDocument(false);
+        }
+
+
+        if (selectStore) {
+            setSelectedStore(false);
+        }
+
+    }
+
 
 
     return (
@@ -70,6 +102,8 @@ function HomepageLeft({ onSelectPage }) {
                 <li onClick={() => onSelectPage('document')}><IoDocuments /><button onClick={handleDocument} className={cx((selectDocument ? 'bt-document' : ""), 'bt')}>Document</button></li>
                 <li onClick={() => onSelectPage('store')}><SiAmazondocumentdb />
                     <button onClick={handleStore} className={cx((selectStore ? 'bt-store' : ""), 'bt')}>Knowledge store</button></li>
+                <li onClick={() => onSelectPage('infor')}><FaRegAddressBook />
+                    <button onClick={handleInfor} className={cx((selectInfor ? 'bt-infor' : ""), 'bt')}>Statistics information</button></li>
             </ul>
 
         </div>

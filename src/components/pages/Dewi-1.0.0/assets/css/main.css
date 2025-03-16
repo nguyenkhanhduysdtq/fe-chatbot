@@ -84,6 +84,19 @@ a {
   transition: 0.3s;
 }
 
+.typing-effect {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.typing-effect span {
+  opacity: 0;
+  animation: typing 0.1s forwards;
+}
+
+
+
 a:hover {
   color: color-mix(in srgb, var(--accent-color), transparent 25%);
   text-decoration: none;
